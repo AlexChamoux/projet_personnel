@@ -1,0 +1,34 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    
+    <div class="container">
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <h1 class="text-center" style="margin-top:7vh;">Compte Administrateur(trice)</h1>
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <h1 class="text-center" style="margin-top:7vh;">Compte SuperAdmin</h1>
+        {% endif %}
+
+        <div class="row" style="margin-top:10vh;">
+            <div class="col-12 col-md-6">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <p><a href="{{ path('app_product_index') }}" class="btn btn-success btn-sm">Gestion des produits</a></p>
+                    <p><a href="{{ path('app_admin_change_password') }}" class="btn btn-danger btn-sm">Changement de mot de passe</a></p>
+                    <p><a href="{{ path('app_admin_index_user') }}" class="btn btn-warning btn-sm">Gestion des utilisateurs(trices)</a></p>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <p><a href="{{ path('app_admin_index') }}" class="btn btn-danger btn-sm">Gestion des Admins</a></p>
+                    <p><a href="{{ path('app_product_index') }}" class="btn btn-success btn-sm">Gestion des produits</a></p>
+                    <p><a href="{{ path('app_admin_index_user')}}" class="btn btn-warning btn-sm">Gestion des utilisateurs(trices)</a></p>
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6">
+               
+            </div>
+        </div>
+
+    </div>
+   
+{% endblock %}

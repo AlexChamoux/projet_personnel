@@ -1,0 +1,35 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Liste des administrateurs(trices){% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Liste des administrateurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admins %}
+                <tr>
+                    <td>{{ admin.firstName }}</td>
+                    <td>{{ admin.lastName }}</td>
+                    <td>{{ admin.email }}</td>
+                    <td>
+                        <form action="{{ path('app_admin_delete', {'id': admin.id}) }}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_add') }}" class="btn btn-primary">Ajouter un administrateur</a>
+{% endblock %}

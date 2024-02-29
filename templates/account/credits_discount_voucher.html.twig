@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <h1>Avoir et Bon de Réduction</h1>
+
+        <h2>Avoir</h2>
+        
+            {% for credit in credits %}
+                <p>Montant: {{ credit.amount }}</p>
+                <p>Raison: {{ credit.reason }}</p>
+            {% else %}
+                <p>Vous n'avez aucun Avoir.</p>
+            {% endfor %}
+    
+
+        <h2>Bon de réduction</h2>
+    
+            {% for voucher in vouchers %}
+                <p>Code: {{ voucher.code }}</p>  
+                <p>Réduction: {{ voucher.reducPercent }}</p>
+            {% else %}
+                <p>Vous n'avez aucun bon de réduction.</p>
+            {% endfor %}
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+{% endblock %}

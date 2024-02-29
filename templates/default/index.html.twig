@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/user/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user/product.css') }}">
+{% endblock %}
+
+{% block title %}Le spécialiste brumisaton{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }} 
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function setupCarousel(prevButton, nextButton, productWrapper) {
+            const products = productWrapper.querySelectorAll('.product_container');
+            const productWidth = products[0].offsetWidth;
+            const productMargin = parseInt(getComputedStyle(products[0]).marginRight);
+            const totalProductWidth = productWidth + (2 * productMargin);
+            const productsCount = products.length;
+            const containerWidth = totalProductWidth * 4;
+            const vwWidth = containerWidth / window.innerWidth * 100;
+            let currentPosition = 0;
+
+            productWrapper.style.width = `${vwWidth}vw`;
+
+            prevButton.addEventListener('click', function() {
+            if (currentPosition < 0) {
+                currentPosition += totalProductWidth / window.innerWidth * 100;
+                productWrapper.style.transform = `translateX(${currentPosition}vw)`;
+            }
+            });
+
+            nextButton.addEventListener('click', function() {
+                if (currentPosition > -(productsCount - 4) * totalProductWidth) {
+                    currentPosition -= totalProductWidth / window.innerWidth * 100;
+                    productWrapper.style.transform = `translateX(${currentPosition}vw)`;
+                }
+            });
+        }
+
+        const prevArrival = document.querySelector('.prev_arrival');
+        const nextArrival = document.querySelector('.next_arrival');
+        const productWrapperArrival = document.querySelector('.product_wrapper_arrival');
+        setupCarousel(prevArrival, nextArrival, productWrapperArrival);
+
+        const prevSellers = document.querySelector('.prev_sellers');
+        const nextSellers = document.querySelector('.next_sellers');
+        const productWrapperSellers = document.querySelector('.product_wrapper_sellers');
+        setupCarousel(prevSellers, nextSellers, productWrapperSellers);
+        
+
+
+        document.getElementById('cart-add-link').addEventListener('click', function(event) {
+            {% if app.user %}
+            {% else %}
+                event.preventDefault(); 
+                alert('Veuillez vous connecter ou créer un compte pour ajouter des produits au panier.');
+            {% endif %}
+        });    
+
+    });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('images/image-carroussel-accueil.jpg') }}" class="d-block w-100" alt="1ère image du carroussel">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('images/image-carroussel-accueil2.jpg') }}" class="d-block w-100" alt="2ième image du carroussel">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <h2 class="text-center">Les nouveautées :</h2>
+                <div class="col-12">
+                    <div class="carousel">
+                        <div class="product_wrapper_arrival">
+                            {% for product in productNew %}
+                                {{ include('partials/product.html.twig', {'product':product}) }}
+                            {% endfor %}
+                        </div>
+                        <button class="prev_arrival">&lt;</button>
+                        <button class="next_arrival">&gt;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h2 class="text-center">Les meilleurs ventes :</h2>
+                <div class="col-12">
+                    <div class="carousel">
+                        <div class="product_wrapper_sellers">
+                            {% for product in productBest %}
+                                {{ include('partials/product.html.twig', {'product':product}) }}
+                            {% endfor %}
+                        </div>
+                        <button class="prev_sellers">&lt;</button>
+                        <button class="next_sellers">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

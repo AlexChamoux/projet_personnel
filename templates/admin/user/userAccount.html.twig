@@ -1,0 +1,26 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <p><a href="{{ path('app_admin_index_user') }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
+
+        <h1 class="text-center" style="margin-top: 10vh;">Mon Compte</h1>        
+
+        <div class="row" style="margin-top: 10vh;">
+            <div class="col-12 col-md-6">
+                <h2>Vos informations personnelles</h2>
+                <p>Gérez vos informations personnelles, vos adresses et vos abonnements.</p>
+                <a href="{{ path('app_admin_user_account_personal_information', {'id': user.id}) }}" class="btn btn-primary">Mes informations personnelles</a>
+                <a href="{{ path('app_admin_user_address_index', {'id': user.id}) }}" class="btn btn-primary">Mes adresses</a>
+            </div>
+            <div class="col-12 col-md-6">
+                <h2>Vos commandes</h2>
+                <p>Suivez vos commandes, vos avoirs et vos bons de réduction.</p>
+                <a href="{{ path('app_admin_user_account_order', {'id': user.id}) }}" class="btn btn-primary">Mes commandes</a>
+                <a href="{{ path('app_admin_user_account_credits_discount_voucher', {'id': user.id}) }}" class="btn btn-primary">Mes avoirs et bons de réduction</a>
+            </div>
+        </div>
+
+    </div>
+   
+{% endblock %}

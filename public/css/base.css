@@ -1,0 +1,29 @@
+.nav-item{
+    list-style: none;
+}
+.custom-bg-color {
+    background-color: #D4EDFF;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.bi-xl{
+    font-size: 1.5vw;
+}
+img.icons{
+    width: 1.7vw;
+}
+.bordure{
+    border: 0.1vh solid black;
+    width: 97.5%;
+}
+.brumisation {
+    color: #33cccc;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+}
+.specialist {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}

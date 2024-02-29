@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Address index{% endblock %}
+
+{% block body %}
+    <h1>Mes Adresses</h1>
+
+    <p>Adresse: 
+        {% if addresses is not empty %}
+            <ul>
+                {% for address in addresses %}
+                    <li>
+                        {{ address.number }} {{ address.street }}, {{ address.zipcode }} {{ address.city }}, {{ address.country }}
+                    </li>
+                
+            </ul>        
+                    <a href="{{ path('app_address_show', {'id': address.id}) }}">show</a>
+                    <a href="{{ path('app_address_edit', {'id': address.id}) }}">edit</a>
+                {% endfor %}
+        {% else %}
+            <p>Pas d'addresse enregistrée pour le moment</p>
+        {% endif %}</p>
+        <a href="{{ path('app_address_new') }}">Ajouter une adresse</a>
+        {% for message in app.flashes('address_message') %}
+            <div class="alert alert-succes alert-dismissible fade show" role="alert"> {{ message }}
+                {# <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> #}
+            </div>
+        {% endfor %}
+{% endblock %}

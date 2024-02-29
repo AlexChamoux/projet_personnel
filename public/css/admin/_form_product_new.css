@@ -1,0 +1,17 @@
+.required, .mainImage {
+    font-weight: bold;
+    margin-top: 2vh;
+}
+.existingImage-container{
+    margin-top: 1vh;
+}
+.add-image{
+    display: block;
+    margin-top: 2vh;
+}
+.ajouter{
+    margin: 3vh;
+}
+.backToList{
+    margin-bottom: 5vh;
+}

@@ -1,0 +1,27 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin/_form_product_new.css') }}">
+{% endblock %}
+
+{% block title %}Nouveau Produit{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"><h1>Ajouter un produit</h1></div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+    {{ include('product/_form.html.twig') }}
+
+    <a href="{{ path('app_product_index') }}" class="btn btn-success mx-2 backToList">Revenir à la liste</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }} 
+    <script src="{{ asset('js/_form.js') }}"></script>
+{% endblock %}

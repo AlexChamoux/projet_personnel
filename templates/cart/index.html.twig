@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Votre Panier</h1>
+    {# {{ dump(cart.products) }} #}
+    {% if cart.products is empty %}
+        <p>Votre panier est vide.</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.products %}
+                    <tr>
+                        <td class="align-middle">&nbsp&nbsp&nbsp<img class="img-fluid" src="{{ asset('upload/products/' ~ item.product.slug ~ '/' ~ item.product.mainImage) }}" alt="Image d'un produit"></td>
+                        <td class="align-middle">{{ item.product.nameProduct }}</td>
+                        <td class="align-middle">
+                            <a href="{{ path('cart_delete', {'id':item.product.id}) }}"><button class="btn btn-sm btn-danger">-</button></a>
+                            <span id="quantity{{ item.product.id }}">{{ item.quantity }}</span>
+                            <a href="{{ path('cart_add', {'id':item.product.id}) }}"><button class="btn btn-sm btn-success">+</button></a>
+                        </td>
+                        <td class="align-middle">{{ item.product.priceProduct }}€</td>
+                        <td class="align-middle">{{ item.quantity * item.product.priceProduct }}€</td>
+                        <td class="align-middle">
+                            <a href="{{ path('cart_delete_all_to', {'id':item.product.id}) }}"><button class="btn btn-sm btn-danger">Supprimer</button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Total: {{ cart.data.subTotal }}€</strong></td>
+                    <td><a href="{{ path('cart_delete_all') }}"<button class="btn btn-sm btn-danger">Vider le Panier</button></td>
+                </tr>
+            </tfoot>  
+        </table>
+        <div class="right">
+            <a href="{{ path('cart_place_order') }}" class="btn btn-primary">Passer la commande</a>
+        </div>
+    {% endif %}
+    <a href="{{ path('app_index') }}">Retour à la page d'accueil</a>
+</div>
+
+<style>
+.container{
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+}
+.img-fluid{
+    height: 8vh;
+}
+.right {
+    text-align: right;
+}
+</style>
+{% endblock %}

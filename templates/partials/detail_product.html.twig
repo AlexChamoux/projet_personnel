@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.nameProduct }}{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('cart-add-link').addEventListener('click', function(event) {
+                {% if app.user %}
+                {% else %}
+                    event.preventDefault(); 
+                    alert('Veuillez vous connecter ou créer un compte pour ajouter des produits au panier.');
+                {% endif %}
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="image-group">
+                <img class="img-fluid large-image" src="{{ asset('upload/products/' ~ product.slug ~ '/' ~ product.mainImage) }}" alt="Image en grand du produit">
+                <div class="image-thumbnails mt-3">
+                    {% for image in product.getImages() %}
+                        <div class="container-thumbnail">
+                            <img class="img-fluid thumbnail" src="{{ asset('upload/products/' ~ product.slug ~ '/' ~ image.getImageFileName()) }}" alt="Miniature des images du produit" data-image="{{ asset('upload/products/' ~ product.slug ~ '/' ~ image.getImageFileName()) }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>{{ product.nameProduct }}</h2>
+            {# <p>{{ product.description }}</p> #}
+            <p><strong>Prix :</strong> {{ product.priceProduct }} EUR</p>
+            <p><strong>Catégorie :</strong> {{ product.getCategory().getNameCategory() }}</p>
+            {# Formulaire d'ajout au panier #}
+            <form action="{{ path('cart_add_qt', {'id': product.id}) }}" method="post">
+                <label for="quantity">Quantité :</label>
+                <input type="number" id="quantity" name="quantity" min="1" required>
+                <button type="submit" class="btn btn-primary mt-3" id="cart-add-link">Ajouter au panier</button>
+            </form>
+        </div>
+    </div>
+            
+            
+            
+        
+    
+    <ul class="nav nav-tabs mt-5" id="productTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="more-info-tab" data-bs-toggle="tab" data-bs-target="#more-info" type="button" role="tab" aria-controls="more-info" aria-selected="false">Informations supplémentaires</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="productTabsContent">
+        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+            <table class="table">
+                <tbody>
+                    {% set descriptionRows = product.description|split('\n') %}
+                    {% for row in descriptionRows %}
+                    <tr>
+                        {% set columns = row|split(':') %}
+                        <td>{{ columns[0] }}</td>
+                        <td>{{ columns[1]|default('') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="more-info" role="tabpanel" aria-labelledby="more-info-tab">
+            <ul>
+                {% for info in product.moreInformation|split('\n') %}
+                <li>{{ info }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+.large-image{
+    height: 50vh;
+}
+.container-thumbnail{
+    margin: 5px;
+    height: 10vh;
+    width: 10vh;
+    justify-content: center;
+    align-items: center;
+}
+.image-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    height: 90%;
+}
+</style>
+<script>
+    $(document).ready(function() {
+        $('.thumbnail').click(function() {
+            var thumbnailSrc = $(this).data('image');
+            $('.img-fluid.large-image').attr('src', thumbnailSrc);
+        });
+    });
+</script>
+
+{% endblock %}

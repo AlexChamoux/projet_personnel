@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Informations Société</h1>
+
+
+    <p>Nom: {{ user.companyName }}</p>
+    <p>E-mail: {{ user.email }}</p>
+    <p>Numéro SIRET: {{ user.siret }}</p>
+    <p>Addresse: 
+        {% if addresses is not empty %}
+            <ul>
+                {% for address in addresses %}
+                    <li>
+                        {{ address.number }} {{ address.street }}, {{ address.zipcode }} {{ address.city }}, {{ address.country }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}    
+    </p>
+{% endblock %}

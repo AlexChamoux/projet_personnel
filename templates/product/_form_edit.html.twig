@@ -1,0 +1,54 @@
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+
+        <div class="row">
+            <div class="col-sm-8">{{ form_row(form.nameProduct) }}</div>
+            <div class="col-sm-4"></div>
+        </div>        
+        {{ form_row(form.description) }}
+        {{ form_row(form.moreInformation) }}
+        {{ form_row(form.createdAt) }}
+        {{ form_row(form.priceProduct) }}
+        {{ form_row(form.isBest) }}
+        {{ form_row(form.isNew) }}
+        {{ form_row(form.category) }}
+
+        {% set mainImage = null %}
+
+        {% for existingImage in existingImages %}
+            {% if existingImage.isMain %}
+                <div>
+                    <label class="mainImage">Image principale actuelle:</label>
+                        <img src="{{ asset(imageDirectory ~ '/' ~ existingImage.imageFileName) }}" alt="Main Image" style="width: 4vw;">
+                        <button type="button" class="remove-image" value="{{ existingImage.id }}" onclick="removeImage(this)">Supprimer l'image principale</button>
+                </div>
+            {% else %}
+                <div class="existingImage-container" style="display:block">
+                    <img src="{{ asset(imageDirectory ~ '/' ~ existingImage.imageFileName) }}" alt="Existing Image" style="width: 4vw;">
+                    <button type="button" class="remove-image" value="{{ existingImage.id }}" onclick="removeImage(this)">Supprimer l'image</button>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+
+            <div id="images-container" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html') }}">    
+                {% for imageForm in form.images %}
+                    {{ form_row(imageForm.file) }}
+                {% endfor %}
+            </div>
+
+
+        <button type="button" class="add-image" onclick="addImage(document.getElementById('images-container'))">Ajouter une image</button>
+
+        <button class="btn btn-danger mx-2tn*">{{ button_label|default('Save') }}</button>
+
+        {{ form_end(form) }}
+            </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

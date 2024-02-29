@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresses Utilisateurs{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="margin-bottom:10vh;">
+
+        <p><a href="{{ path('app_admin_user_account', {'id': user.id}) }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
+
+        <h1 class="text-center" style="margin-top:10vh;">Mes Adresses</h1>
+
+        <p style="margin-top:10vh;"><strong>Adresse:</strong> 
+            {% if addresses is not empty %}
+                <ul>
+                    {% for address in addresses %}
+                        <li>
+                            {{ address.number }} {{ address.street }}, {{ address.zipcode }} {{ address.city }}, {{ address.country }}
+                        </li>
+                    
+                </ul>        
+                        <a href="{{ path('app_address_show', {'id': address.id}) }}">show</a>
+                        <a href="{{ path('app_address_edit', {'id': address.id}) }}">edit</a>
+                    {% endfor %}
+            {% else %}
+                <p>Pas d'addresse enregistrée pour le moment</p>
+            {% endif %}
+        </p>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+{% endblock %}

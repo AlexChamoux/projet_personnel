@@ -1,0 +1,38 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="margin-bottom:10vh;">
+
+    <p><a href="{{ path('app_admin_user_account', {'id': user.id}) }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
+
+        <h1 class="text-center" style="margin-top:10vh;">Informations Personnelles</h1>        
+        
+        <div class="text-center" style="margin-top:10vh;">
+            <p>Nom: {% if user.gender == 1 %}
+                M.
+            {% elseif user.gender == 2 %}
+                Mme
+            {% else %}
+                {# Ne rien afficher pour le genre 3 #}
+            {% endif %}
+            {{ user.firstname }} {{ user.lastname }}</p>
+            <p>E-mail: {{ user.email }}</p>
+            <p>Date de naissance: {{ user.birthDate|date('Y-m-d') }}</p>
+            <p>Adresse: 
+                {% if addresses is not empty %}
+                    <ul>
+                        {% for address in addresses %}
+                            <li>
+                                {{ address.number }} {{ address.street }}, {{ address.zipcode }} {{ address.city }}, {{ address.country }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+{% endblock %}

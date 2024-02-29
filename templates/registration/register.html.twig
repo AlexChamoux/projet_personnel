@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Inscription</h2>
+            {# {{ form_start(registrationForm) }}
+                {{ form_label(registrationForm.gender, 'Civilité', {'label_attr': {'for': 'gender'}}) }}
+                {{ form_row(registrationForm.firstname) }}
+                {{ form_row(registrationForm.lastname) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}                
+                {{ form_row(registrationForm.birth_date) }}
+
+                <button type="submit" class="btn btn-primary">Register as User</button>
+            {{ form_end(registrationForm) }} #}
+            {{ form_start(registrationForm) }}
+                <div class="form-group">
+                    {{ form_label(registrationForm.gender, 'Civilité', {'label_attr': {'for': 'gender'}}) }}
+                    {{ form_widget(registrationForm.gender, {'required': false}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationForm.email, 'E-mail *', {'label_attr': {'for': 'email'}}) }}
+                    {{ form_widget(registrationForm.email, {'required': true}) }}
+                </div>
+                <div class="form-group">
+                    {# {{ form_label(registrationForm.plainPassword, 'Mot de passe *', {'label_attr': {'for': 'plainPassword'}}) }} #}
+                    {{ form_widget(registrationForm.plainPassword, {'required': true}) }}
+                    {{ form_errors(registrationForm.plainPassword) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationForm.firstname, 'Prénom *', {'label_attr': {'for': 'firstname'}}) }}
+                    {{ form_widget(registrationForm.firstname, {'required': true}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationForm.lastname, 'Nom *', {'label_attr': {'for': 'lastname'}}) }}
+                    {{ form_widget(registrationForm.lastname, {'required': true}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationForm.birth_date, 'Date de naissance', {'label_attr': {'for': 'birth_date'}}) }}
+                    {{ form_widget(registrationForm.birth_date, {'required': false}) }}
+                </div>
+
+                <button type="submit">S'inscrire</button>
+            {{ form_end(registrationForm) }}
+            <p>Les champs avec un * sont obligatoires</p>
+            {% if form_errors(registrationForm) %}
+                <ul class="alert alert-danger">
+                    {% for error in form_errors(registrationForm) %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h2>Inscription pour les Professionnels</h2>
+            {{ form_start(registrationFormPro) }}        
+                <div class="form-group">
+                    {{ form_label(registrationFormPro.email, 'E-mail *', {'label_attr': {'for': 'email'}}) }}
+                    {{ form_widget(registrationFormPro.email, {'required': true}) }}
+                </div>
+                <div class="form-group">
+                    {# {{ form_label(registrationFormPro.plainPassword, 'Mot de passe *', {'label_attr': {'for': 'plainPassword'}}) }} #}
+                    {{ form_widget(registrationFormPro.plainPassword, {'required': true}) }}
+                    {{ form_errors(registrationFormPro.plainPassword) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationFormPro.company_name, 'Nom de la Société *', {'label_attr': {'for': 'company_name'}}) }}
+                    {{ form_widget(registrationFormPro.company_name, {'required': true}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationFormPro.siret, 'N° SIRET *', {'label_attr': {'for': 'siret'}}) }}
+                    {{ form_widget(registrationFormPro.siret, {'required': true}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registrationFormPro.phone_number, 'N° de téléphone *', {'label_attr': {'for': 'phone_number'}}) }}
+                    {{ form_widget(registrationFormPro.phone_number, {'required': true}) }}
+                </div>
+
+
+                <button type="submit">S'inscrire</button>
+            {{ form_end(registrationFormPro) }}
+
+            {% if form_errors(registrationFormPro) %}
+                <ul class="alert alert-danger">
+                    {% for error in form_errors(registrationFormPro) %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

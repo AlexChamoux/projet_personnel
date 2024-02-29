@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1 class="text-center">
+                <p>Historique</p>
+                <p>des commandes</p>
+            </h1>
+        
+            {% if orders is not empty %}
+                <table  class="table" style="margin-top:10vh;">
+                    {% set previousDate = '' %}
+                    {% set previousTotalOrder = 0 %}
+                    {% for order in orders %}
+                        {% if order.dateOrder != previousDate %}                                                    
+                            <tr>
+                                <td colspan="6" class="text-center">{{ order.dateOrder|date('d/m/Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5"><strong>Total de la commande : {{ order.totalOrder }}€</strong></td>
+                            </tr>  
+                            <tr>
+                                <th></th>
+                                <th class="text-center">Produit</th>
+                                <th class="text-center">Quantité</th>
+                                <th class="text-center">Prix unitaire</th>
+                                <th class="text-center">Total</th>
+                            </tr>                                              
+                        {% endif %}
+                            <tr>
+                                <td class="align-middle text-center"><img class="img-fluid" src="{{ asset('upload/products/' ~ order.pathMainImage) }}" alt="Image d'un produit" style="height: 15vh;"></td>
+                                <td class="align-middle text-center">{{ order.orderedItemName }}</td>
+                                <td class="align-middle text-center">{{ order.quantity }}</td>
+                                <td class="align-middle text-center">{{ order.priceUnit }}€</td>
+                                <td class="align-middle text-center">{{ order.total }}€</td>
+                            </tr>               
+                        {% set previousTotalOrder = order.totalOrder %}
+                        {% set previousDate = order.dateOrder %}
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>Vous n'avez encore passé aucune commande.</p>
+            {% endif %}
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+{% endblock %}
+

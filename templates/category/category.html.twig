@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/user/product.css') }}">
+{% endblock %}
+
+{% block title %}{{ category.nameCategory }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center" style="margin-top:10vh;margin-bottom:10vh;">{{ category.nameCategory }}</h1>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin: 0 auto;">
+        
+        
+        {% for product in products %}
+            {{ include('partials/product.html.twig', {'product':product}) }}
+        {% endfor %}
+        
+    </div>
+    </div>
+{% endblock %}
