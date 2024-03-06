@@ -9,28 +9,6 @@
             {{ encore_entry_link_tags('app') }}
              {# <link rel="stylesheet" href="path/to/font-awesome.min.css"> #}
              <link rel="stylesheet" href="{{ asset('css/base.css') }}">
-            {# <style>
-                .nav-item{
-                    list-style: none;
-                }
-                .custom-bg-color {
-                    background-color: #D4EDFF;
-                }
-                a{
-                    text-decoration: none;
-                    color: black;
-                }
-                .bi-xl{
-                    font-size: 1.5vw;
-                }
-                img.icons{
-                    width: 1.7vw;
-                }
-                .bordure{
-                    border: 0.1vh solid black;
-                    width: 97.5%;
-                }
-            </style> #}
         {% endblock %}
 
         {% block javascripts %}            
@@ -49,8 +27,8 @@
                     <div class="col-sm-2"></div>
                     <div class="col-sm-3">
                         <div class="d-flex align-items-center flex-wrap">
-                            <img src="{{ asset('icons/droplet-fill.svg') }}" class="icons" alt="goutte d'eau" style="height: 1.3vh;">
-                            <span class="align-middle">Le spécialiste de la brumisation</span>
+                            <p><img src="{{ asset('icons/droplet-fill.svg') }}" class="icons" alt="goutte d'eau" style="height: 1.3vh;">
+                            <span class="align-middle">Le spécialiste de la brumisation</span></p>
                         </div>
                     </div>
                     <div class="col-sm-2"></div>
@@ -58,12 +36,12 @@
                         <a href="{{ path('app_cart') }}">
                             {% if app.user %}
                                 {% if app.session.get('cartData') is null or app.session.get('cartData')['data'] is null %}
-                                    <i class="bi bi-basket2-fill">0</i>
+                                    (0)&nbsp;<img src="{{ asset('icons/cart-color.png') }}" class="icons" alt="Panier">
                                 {% else %}    
-                                    <i class="bi bi-basket2-fill"></i>({{ app.session.get('cartData')['data']['quantityCart'] }})
+                                    ({{ app.session.get('cartData')['data']['quantityCart'] }})&nbsp;<img src="{{ asset('icons/cart-color.png') }}" class="icons" alt="Panier">
                                 {% endif %}
                             {% else %}
-                                <i class="bi bi-basket2-fill"></i>
+                                <img src="{{ asset('icons/cart-color.png') }}" class="icons" alt="Panier">
                             {% endif %}
                         </a>
                         &nbsp;&nbsp;&nbsp;
@@ -76,9 +54,9 @@
                                 <a href="{{ path('app_admin_account') }}" class="btn btn-success mx-2 text-white">Mon compte</a>
                             {% endif %}
 
-                        {% else %}
+                        {% else %}                            
                             <a href="{{ path('app_login') }}" class="btn btn-primary mx-2">Connexion</a> 
-                            <a href="{{ path('app_register') }}" class="btn btn-warning mx-2">Inscription</a>
+                            <a href="{{ path('app_register') }}" class="btn btn-warning mx-2">Inscription</a>                            
                         {% endif %}
                     </div>
                     <div class="col-sm-1"></div>
@@ -128,7 +106,7 @@
             </div>
         </header>
         {% block body %}{% endblock %}
-        <footer>
+        <footer class="footer">
             <div class="container custom-bg-color">
                 <div class="row fw-bold">
                     <div class="col-sm-3 d-flex align-items-center"><img src="{{ asset('icons/smiley.png') }}" class="icons" alt="smiley">&nbsp Brumisateur GARANTIE 2 ans *</div>
@@ -150,9 +128,9 @@
                     <div class="col-sm-4">
                         <h4>Informations</h4>
                             <p><a href="#">Contacter le service client</a></p>
-                            <p><a href="#">Mentions légales</a></p>
-                            <p><a href="#">Conditions d'utlisation</a></p>
-                            <p><a href="#">Actualités</a></p>
+                            <p><a href="{{ path('legal_mention') }}">Mentions légales</a></p>
+                            <p><a href="{{ path('conditions-utilisation') }}">Conditions d'utlisation</a></p>
+                            <p><a href="https://le-specialiste-brumisation.com/content/category/2-actualites">Actualités</a></p>
                         </ul>
                     </div>
                     <div class="col-sm-4">
@@ -161,16 +139,16 @@
                     <div class="col-sm-4">
                         <h4>Contact</h4>
                         <p>
-                            <i class="bi bi-telephone"></i>&nbspAppelez-nous au : +33 (0)3 73 57 00 79
+                            <img src="{{ asset('icons/mobil-phone.png') }}" class="icons" alt="Icône Téléphone mobile">&nbspAppelez-nous au : +33 (0)3 73 57 00 79
                         </p>
                         <p>
-                            <i class="bi bi-envelope"></i>&nbspE-mail : info@le-specialiste-brumisation.com
+                            <img src="{{ asset('icons/e-mail.png') }}" class="icons" alt="Icône e-mail">&nbspE-mail : info@le-specialiste-brumisation.com
                         </p>
                         <p>
-                            <i class="bi bi-map"></i>&nbspEts S.G.M.N. E-Trade, 2, Route de Beaune - 71210 Écuisses - France
+                            <img src="{{ asset('icons/adresse.png') }}" class="icons" alt="Icône carte">&nbspEts S.G.M.N. E-Trade, 2, Route de Beaune - 71210 Écuisses - France
                         </p>
                         <p>
-                            Fax : +33 (0)3 85 78 91 94
+                             <img src="{{ asset('icons/fax.png') }}" class="icons" alt="Icône fax">&nbspFax : +33 (0)3 85 78 91 94
                         </p>
                     </div>
                 </div>

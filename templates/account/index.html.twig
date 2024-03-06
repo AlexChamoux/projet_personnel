@@ -1,23 +1,8 @@
-{# {% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Mon Compte</h1>
-    
-    <h2>Bienvenue sur la page ou vous gérez votre compte.</h2> 
-    <h3>Les commandes, vos infos personnel et vos devis.</h3>
-    <p>Vous retrouvez aussi vos Avoirs et Bons de réduction</p>
-    
-        <a href="{{ path('add_address') }}">Ajouter une adresse</a>
-        <a href="{{ path('account_personal_information') }}">Mes Informations Personnelles</a>
-        <a href="{{ path('account_credits_discount_voucher') }}">Mes Avoirs et Bons de Réduction</a>
-        <a href="{{ path('account_order') }}">Mes Commandes</a>
-    
-{% endblock %} #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
     <div class="container">
-        <h1>Mon Compte</h1>
+        <h1 class="text-center" style="margin-bottom: 10vh;">Mon Compte</h1>
 
         <div class="row">
             <div class="col-12 col-md-6">

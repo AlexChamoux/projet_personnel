@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Informations Société</h1>
+
+<div class="container">
+
+    <p><a href="{{ path('app_account') }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
+
+    <h1 class="text-center" style="margin-bottom: 10vh;">Informations Société</h1>
 
 
-    <p>Nom: {{ user.companyName }}</p>
-    <p>E-mail: {{ user.email }}</p>
-    <p>Numéro SIRET: {{ user.siret }}</p>
-    <p>Addresse: 
+    <p><strong>Nom:</strong> {{ user.companyName }}</p>
+    <p><strong>E-mail:</strong> {{ user.email }}</p>
+    <p><strong>Numéro SIRET:</strong> {{ user.siret }}</p>
+    <p><strong>Addresse:</strong> 
         {% if addresses is not empty %}
             <ul>
                 {% for address in addresses %}
@@ -18,4 +23,6 @@
             </ul>
         {% endif %}    
     </p>
+
+</div>
 {% endblock %}

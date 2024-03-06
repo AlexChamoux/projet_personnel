@@ -1,0 +1,21 @@
+table {
+    max-width: 95vw;
+    text-align: center;
+    margin-left:2vw;
+}
+
+.title {
+    text-align: center;
+}
+
+.marge {
+    margin-bottom: 5vh;
+}
+
+.product-table {
+    display: none;
+}
+
+.category-name {
+    cursor: pointer;
+}

@@ -3,9 +3,14 @@
 {% block title %}Address index{% endblock %}
 
 {% block body %}
-    <h1>Mes Adresses</h1>
 
-    <p>Adresse: 
+<div class="container">
+
+    <p><a href="{{ path('app_account') }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
+
+    <h1 class="text-center" style="margin-bottom: 10vh;">Mes Adresses</h1>
+
+    <p><strong>Adresse:</strong> 
         {% if addresses is not empty %}
             <ul>
                 {% for address in addresses %}
@@ -28,4 +33,6 @@
                 </button> #}
             </div>
         {% endfor %}
+
+</div>
 {% endblock %}

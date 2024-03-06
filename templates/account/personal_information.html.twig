@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Informations Personnelles</h1>
-    <p>Nom: {% if user.gender == 1 %}
+<div class="container">
+
+    <p><a href="{{ path('app_account') }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
+
+    <h1 class="text-center" style="margin-bottom: 10vh;">Informations Personnelles</h1>
+    <p><strong>Nom:</strong> {% if user.gender == 1 %}
         M.
     {% elseif user.gender == 2 %}
         Mme
     {% else %}
-        {# Ne rien afficher pour le genre 3 #}
+    
     {% endif %}
      {{ user.firstname }} {{ user.lastname }}</p>
-    <p>E-mail: {{ user.email }}</p>
-    <p>Date de naissance: {{ user.birthDate|date('Y-m-d') }}</p>
-    <p>Adresse: 
+    <p><strong>E-mail:</strong> {{ user.email }}</p>
+    <p><strong>Date de naissance:</strong> {{ user.birthDate|date('Y-m-d') }}</p>
+    <p><strong>Adresse:</strong> 
         {% if addresses is not empty %}
             <ul>
                 {% for address in addresses %}
@@ -22,4 +26,5 @@
                 {% endfor %}
             </ul>
         {% endif %}</p>
+</div>
 {% endblock %}

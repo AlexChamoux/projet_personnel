@@ -18,6 +18,7 @@
             const productMargin = parseInt(getComputedStyle(products[0]).marginRight);
             const totalProductWidth = productWidth + (2 * productMargin);
             const productsCount = products.length;
+            let remainingProductsCount = productsCount - 4;
             const containerWidth = totalProductWidth * 4;
             const vwWidth = containerWidth / window.innerWidth * 100;
             let currentPosition = 0;
@@ -28,13 +29,24 @@
             if (currentPosition < 0) {
                 currentPosition += totalProductWidth / window.innerWidth * 100;
                 productWrapper.style.transform = `translateX(${currentPosition}vw)`;
+                console.log(currentPosition);
+            }else {
+                currentPosition = -(productsCount - 4) * totalProductWidth / window.innerWidth * 100;
+                productWrapper.style.transform = `translateX(${currentPosition}vw)`;
+                {# console.log(currentPosition); #}
             }
             });
 
             nextButton.addEventListener('click', function() {
-                if (currentPosition > -(productsCount - 4) * totalProductWidth) {
+                if (currentPosition > -remainingProductsCount * totalProductWidth) {
+                    console.log(currentPosition);
                     currentPosition -= totalProductWidth / window.innerWidth * 100;
                     productWrapper.style.transform = `translateX(${currentPosition}vw)`;
+                    remainingProductsCount--;
+                } else {
+                    currentPosition = 0;
+                    productWrapper.style.transform = `translateX(${currentPosition}vw)`;
+                    remainingProductsCount = productsCount - 4;
                 }
             });
         }

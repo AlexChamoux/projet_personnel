@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\ENtity\Category;
 use App\Entity\Images;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,12 +26,15 @@ use Symfony\Component\Validator\Constraints\File;
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'app_product_index', methods: ['GET'])]
-    public function index(ProductRepository $pRepo): Response
+    public function index(ProductRepository $pRepo, CategoryRepository $cRepo): Response
     {
         $products = $pRepo->findAll();
+        $categories = $cRepo->findAll();
+
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
+            'categories' => $categories,
         ]);
     }
 

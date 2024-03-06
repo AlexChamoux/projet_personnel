@@ -51,4 +51,21 @@ class DefaultController extends AbstractController
         ]);
 
     }
+
+    #[Route('/mention-legal/', name: 'legal_mention')]
+    public function legalMention():Response{
+
+        return $this->render('default/legal-mention.html.twig', [
+        ]);
+
+    }
+
+    #[Route('/conditions-utilisation/', name: 'conditions-utilisation')]
+    public function CGU():Response{
+
+        return $this->render('default/conditions-utilisation.html.twig', [
+        ]);
+
+    }
+
 }

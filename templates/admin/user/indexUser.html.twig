@@ -3,67 +3,75 @@
 {% block title %}Liste des utilsateurs(trices){% endblock %}
 
 {% block body %}
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="margin-bottom:10vh;">
 
-    <h1 class="text-center" style="margin-top: 10vh">Liste des utilisateurs(trices)</h1>
+        <p><a href="{{ path('app_admin_account') }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
 
-    <p><a href="{{ path('app_admin_account') }}"><img src="{{ asset('icons/back.svg') }}" class="icons" alt="flèche de retour"></a></p>
+        <h1 class="text-center" style="margin-top: 10vh">Liste des utilisateurs(trices)</h1>
 
-    <table class="table" style="margin-top: 10vh;">
-        <thead>
-            <tr>
-                <th>Genre</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Date de Naissance</th>
-                <th>Type de compte</th>
-                <th>Nom de la Société</th>
-                <th>N° SIRET</th>
-                <th>N° de téléphone</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
+        
+
+        <table class="table" style="margin-top: 10vh;">
+            <thead>
                 <tr>
-                    <td>
-                        {% if user.gender == 1 %}
-                            {{ 'Monsieur' }}
-                        {% elseif user.gender == 2 %}
-                            {{ 'Madame' }}
-                        {% elseif user.gender == 3 %}
-                            {{ 'Préfère ne rien renseigner' }}
-                        {% endif %}
-                    </td>
-                    <td>{{ user.firstName }}</td>
-                    <td>{{ user.lastName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        {% if user.birthDate is empty %}
-                        {% else %}
-                            {{ user.birthDate|date('d/m/Y') }}
-                        {% endif %}
-                    </td>
-                    <td>
-                    {%if user.userType == "pro" %}
-                        {{ 'Professionnel' }}
-                    {% elseif user.userType == "standard" %}
-                        {{ 'Standard' }}
-                    {% endif %}
-                    </td>
-                    <td>{{ user.companyName }}</td>
-                    <td>{{ user.siret }}</td>
-                    <td>{{ user.phoneNumber }}</td>
-                    <td>
-                        <form action="{{ path('app_admin_delete', {'id': user.id}) }}" method="post">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
-                        <a href="{{ path('app_admin_user_account', {'id': user.id}) }}" class="btn btn-warning">Accéder au compte</a>
-                    </td>
+                    <th>Genre</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Date de Naissance</th>
+                    <th>Type de compte</th>
+                    <th>Nom de la Société</th>
+                    <th>N° SIRET</th>
+                    <th>N° de téléphone</th>
+                    <th>Actions</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>
+                            {% if user.gender == 1 %}
+                                {{ 'Monsieur' }}
+                            {% elseif user.gender == 2 %}
+                                {{ 'Madame' }}
+                            {% elseif user.gender == 3 %}
+                                {{ 'Préfère ne rien renseigner' }}
+                            {% endif %}
+                        </td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.birthDate is empty %}
+                            {% else %}
+                                {{ user.birthDate|date('d/m/Y') }}
+                            {% endif %}
+                        </td>
+                        <td>
+                        {%if user.userType == "pro" %}
+                            {{ 'Professionnel' }}
+                        {% elseif user.userType == "standard" %}
+                            {{ 'Standard' }}
+                        {% endif %}
+                        </td>
+                        <td>{{ user.companyName }}</td>
+                        <td>{{ user.siret }}</td>
+                        <td>{{ user.phoneNumber }}</td>
+                        <td>
+                            <form action="{{ path('app_admin_delete', {'id': user.id}) }}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                            <a href="{{ path('app_admin_user_account', {'id': user.id}) }}" class="btn btn-warning">Compte Utilisateur</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
 
 {% endblock %}
