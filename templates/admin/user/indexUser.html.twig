@@ -60,7 +60,7 @@
                         <td>{{ user.siret }}</td>
                         <td>{{ user.phoneNumber }}</td>
                         <td>
-                            <form action="{{ path('app_admin_delete', {'id': user.id}) }}" method="post">
+                            <form action="{{ path('app_admin_user_delete', {'id': user.id}) }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                             </form>

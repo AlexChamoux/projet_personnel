@@ -78,7 +78,7 @@ class AdminController extends AbstractController
     #[Security("ROLE_SUPER_ADMIN")]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {        
-        // Supprimer l'utilisateur Admin de la base de données
+        // Supprimer l'Admin de la base de données
         $entityManager->remove($user);
         $entityManager->flush();
 
@@ -245,6 +245,20 @@ class AdminController extends AbstractController
             'user' => $userId,
             'addresses' => $addresses,
         ]);
+    }
+
+    #[Route('/user/delete/{id}', name: 'app_admin_user_delete', methods: ['POST'])]
+    #[Security("ROLE_ADMIN")]
+    public function deleteUser(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    {
+        // Supprimer l'utilisateur de la base de données
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        // Afficher un message de succès
+        $this->addFlash('success', 'L\'utilisateur a été supprimé avec succès.');
+
+        return $this->redirectToRoute('app_admin_index_user');
     }
 
 }
